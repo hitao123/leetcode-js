@@ -1,0 +1,19 @@
+{
+  "name": "interview-code",
+  "version": "1.0.0",
+  "description": "剑指 offer &amp; 程序员面试宝典 & leetcode",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hitao123/interview-code.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hitao123/interview-code/issues"
+  },
+  "homepage": "https://github.com/hitao123/interview-code#readme"
+}
