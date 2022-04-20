@@ -1,3 +1,3 @@
-# interview-code
+# leetcode js 题解
 
-> 剑指 offer  & 程序员面试宝典 & leetcode 部分题解
+> leetcode 按照分类题解
