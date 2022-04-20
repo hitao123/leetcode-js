@@ -1,13 +1,17 @@
-// https://leetcode-cn.com/problems/permutations/
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
 
-var permute = function (nums) {
+var permuteUnique = function (nums) {
     let res = []
-    let track = new Array()
-    backtrack(nums, track)
+    let used = new Array(nums.length).fill(0)
+    nums.sort((a, b) => { return a - b })
+    backtrack(nums, [])
+
     return res
 
     function backtrack(nums, track) {
-
         // base code
         if (track.length == nums.length) {
             let temp = []
@@ -20,14 +24,21 @@ var permute = function (nums) {
         }
 
         for (let i = 0; i < nums.length; i += 1) {
-            if (track.indexOf(nums[i]) != -1) {
+            if (used[i]) {
                 continue
             }
+
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
+            }
+
             track.push(nums[i])
+            used[i] = 1
             // 进入下一层
             backtrack(nums, track)
             // 取消选择
             track.pop()
+            used[i] = 0
         }
     }
 };

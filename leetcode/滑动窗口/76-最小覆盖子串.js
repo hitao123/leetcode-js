@@ -53,6 +53,4 @@ var minWindow = function(s, t) {
     return len == Number.MAX_SAFE_INTEGER ? '' : s.substr(start, len)
 };
 
-minWindow("ADOBECODEBANC", "ABC")
-// minWindow("EBBANCF", "ABC")
 
