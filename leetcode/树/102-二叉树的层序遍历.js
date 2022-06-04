@@ -31,7 +31,7 @@ const levelOrderBottom = function (root) {
                 queue.push(node.right)
             }
         }
-        res.unshift(arr)
+        res.push(arr)
     }
     return res
 }
