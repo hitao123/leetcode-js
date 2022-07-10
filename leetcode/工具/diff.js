@@ -20,7 +20,7 @@ class Diff {
     increment(start, end, val) {
         this.diffArr[start] += val
         if (end + 1 < this.diffArr.length) {
-            diff[end+1] -= val
+            this.diffArr[end+1] -= val
         }
     }
 
