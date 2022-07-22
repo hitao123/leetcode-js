@@ -11,26 +11,28 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-    let carry = 0;
-    let sum = 0;
+    let carry = 0
+    let sum = 0
     let dummy = new ListNode()
+    let cur = dummy
 
     while (l1 || l2 || carry > 0) {
         sum = carry
         if (l1) {
             sum += l1.val
-            l1 = l1.next;
+            l1 = l1.next
         }
 
         if (l2) {
             sum += l2.val
-            l2 = l2.next;
+            l2 = l2.next
         }
 
         carry = Math.floor(sum / 10)
-        let node = new ListNode(sum % 10)
-        dummy.next = node
-        dummy = node
+        let temp = new ListNode(sum % 10)
+
+        cur.next = temp
+        cur = temp
     }
 
     return dummy.next
