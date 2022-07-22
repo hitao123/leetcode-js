@@ -1,19 +1,19 @@
 {
-  "name": "interview-code",
+  "name": "leetcode-js",
   "version": "1.0.0",
-  "description": "剑指 offer &amp; 程序员面试宝典 & leetcode",
+  "description": "leetcode javascript 题解",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hitao123/interview-code.git"
+    "url": "git+https://github.com/hitao123/leetcode-js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hitao123/interview-code/issues"
+    "url": "https://github.com/hitao123/leetcode-js/issues"
   },
-  "homepage": "https://github.com/hitao123/interview-code#readme"
+  "homepage": "https://github.com/hitao123/leetcode-js#readme"
 }
