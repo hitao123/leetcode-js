@@ -7,8 +7,8 @@
 $$
 F(n)=
 \begin{cases}
-n, n = 0,1   \\
-F(n-1) + F(n-2) ,n > 2\\
+n,\quad n = 0,1   \\
+F(n-1) + F(n-2),\quad n > 2\\
 \end{cases}
 $$
 
@@ -86,3 +86,100 @@ var fib = function(n) {
 ```
 
 ## 零钱兑换
+
+> 零钱存在3种，可以无限使用，假如使用 dp() 表示返回的零钱最小数量，我们可以列出下面公式
+
+$$
+dp(n)=
+\begin{cases}
+0, \quad n = 0   \\
+-1, \quad n < 0\\
+min \{ dp(n-coin) + 1 \}, \quad n > 0
+\end{cases}
+$$
+
+```js
+var coinChange = function(coins, amount) {
+    return dp(coins, amount) 
+};
+
+function dp(coins, amount) {
+    // base case
+    if (amount == 0) {
+        return 0
+    }
+
+    if (amount < 0) {
+        return -1
+    }
+
+    let res = Number.MAX_SAFE_INTEGER;
+    for (let i = 0; i < coins.length; i++) {
+        let subProblem = dp(coins, amount - coins[i])
+        if (subProblem == -1) {
+            continue
+        }
+        res = Math.min(res, subProblem + 1)
+    }
+
+    return res != Number.MAX_SAFE_INTEGER ? res : -1
+}
+```
+
+基于上面斐波那契的方式，我们可以通过剪枝来优化我们的解法, 使用一个备忘录来存储每次的计算结果
+
+```js
+var coinChange = function(coins, amount) {
+    let memo = new Array(amount + 1).fill(-999)
+    return dp(coins, amount) 
+
+    function dp(coins, amount) {
+        // base case
+        if (amount == 0) {
+            return 0
+        }
+
+        if (amount < 0) {
+            return -1
+        }
+
+        if (memo[amount] != -999) {
+            return memo[amount]
+        }
+
+        let res = Number.MAX_SAFE_INTEGER;
+        for (let i = 0; i < coins.length; i++) {
+            let subProblem = dp(coins, amount - coins[i])
+            if (subProblem == -1) {
+                continue
+            }
+            res = Math.min(res, subProblem + 1)
+        }
+
+        memo[amount] = res != Number.MAX_SAFE_INTEGER ? res : -1
+
+        return memo[amount]
+    }
+};
+```
+
+上面是自顶向下的一个解法，我们可以再尝试使用自底向上的解法
+
+```js
+var coinChange = function(coins, amount) {
+    let dp = new Array(amount + 1).fill(amount + 1)
+    dp[0] = 0
+
+    for (let i = 0; i < dp.length; i++) {
+        for (let j = 0; j < coins.length; j++) {
+            // i 这里就是 amount dp[i] 代表 i 当前amount 的时候最小的硬币数
+            if (i - coins[j] < 0) {
+                continue
+            }
+            dp[i] = Math.min(dp[i-coins[j]] + 1, dp[i])
+        }
+    }
+
+    return dp[amount] == amount + 1 ? -1 : dp[amount]
+};
+```
