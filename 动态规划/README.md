@@ -183,3 +183,38 @@ var coinChange = function(coins, amount) {
     return dp[amount] == amount + 1 ? -1 : dp[amount]
 };
 ```
+
+## 自顶向下 & 自底向上
+
+```bash
+从上面两道题目的解法可以看出
+自顶向下: 是使用递归的方式，加上备忘录进行剪枝进行优化，使用 dp 函数进行定义
+自底向上: 通过初始的 case， 从 0 进行像后进行计算，使用数组定义 dp
+这类题目需要注意的是边界，以及 dp 函数的含义
+```
+
+## 最长递增子序列
+
+> 这道题我们使用自底向上的思路，首先定义 dp[i] 代表 以 i 为终点的最长递增长度，那么我们可以找到小于 i 的当前 dp[j] 加上 1 就是当前最大的最长递增长度，获取 dp 每个位置的最长递增长度，由于是求最大的，需要将数据遍历一下取出最大值
+
+```js
+var lengthOfLIS = function (nums) {
+    let dp = new Array(nums.length).fill(1)
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                dp[i] = Math.max(dp[i], dp[j] + 1)
+            }
+        }
+    }
+
+    let res = Number.MIN_SAFE_INTEGER
+
+    for (let i = 0; i < dp.length; i++) {
+        res = Math.max(dp[i], res)
+    }
+
+    return res
+};
+```
